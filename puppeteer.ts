@@ -50,7 +50,7 @@ class ExtendedBrowserWebSocketTransport extends BrowserWebSocketTransport {
 export async function launch(
   executablePath: string,
   headless: boolean,
-  options: AppOptions,
+  options: AppOptions
 ): Promise<LaunchResult> {
   const chromeArgs = prepareChromeArgs(executablePath, headless, options);
   const chromeProcess = Deno.run({
@@ -61,6 +61,7 @@ export async function launch(
   const transport = await ExtendedBrowserWebSocketTransport.create(wsEndpoint);
   const browser = await puppeteer.connect({
     ignoreHTTPSErrors: true,
+    defaultViewport: null,
     transport,
   });
   await browser.waitForTarget((t: Target) => t.type() === "page");
@@ -73,7 +74,7 @@ export async function launch(
 function prepareChromeArgs(
   executablePath: string,
   headless: boolean,
-  options: AppOptions,
+  options: AppOptions
 ): string[] {
   const chromeArguments = [
     executablePath,
@@ -103,10 +104,7 @@ function prepareChromeArgs(
     "--use-mock-keychain",
     "--enable-blink-features=IdleDetection",
   ];
-  const {
-    args = [],
-    userDataDir = null,
-  } = options;
+  const { args = [], userDataDir = null } = options;
 
   if (userDataDir) {
     chromeArguments.push(`--user-data-dir=${resolve(userDataDir)}`);
