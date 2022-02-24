@@ -99,7 +99,7 @@ function prepareChromeArgs(
     "--force-color-profile=srgb",
     "--metrics-recording-only",
     "--no-first-run",
-    "--enable-automation",
+    // "--enable-automation",
     "--password-store=basic",
     "--use-mock-keychain",
     "--enable-blink-features=IdleDetection",
