@@ -102,7 +102,7 @@ function prepareChromeArgs(
     // "--enable-automation",
     "--password-store=basic",
     "--use-mock-keychain",
-    "--enable-blink-features=IdleDetection",
+    // "--enable-blink-features=IdleDetection",
   ];
   const { args = [], userDataDir = null } = options;
 
